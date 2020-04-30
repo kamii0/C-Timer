@@ -1,0 +1,41 @@
+// Palindrome.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+
+
+#include <iostream>
+#include <cstdlib>
+#include <string>
+//#include "stdafx.h"
+
+using namespace std;
+
+//#include <iostream>
+//using namespace std;
+//pre condition: method will re arrange the words based on the low and high integers
+bool isPalindrome(const string& x, int low, int high)
+{
+	if (high <= low)
+		return true;
+
+	else if (x[low] != x[high])
+		return false;
+
+	else
+		return isPalindrome(x, low + 1, high - 1);
+}
+//post condition: isPalindrome is returned
+bool isPalindrome(const string& x)
+{
+	return isPalindrome(x, 0, x.size() - 1);
+}
+//post condition: string is returned
+int main()
+{
+	string thisWord;
+	cout << "\n Please enter a word " << endl;
+	cin >> thisWord;
+	cout << "isPalindrome?: " << isPalindrome(thisWord) << endl; //if it is true, print 1, if it is false, print 0
+	return 0;
+}
