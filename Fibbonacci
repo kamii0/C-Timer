@@ -1,0 +1,33 @@
+// fibonacci.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+
+#include<iostream>
+using namespace std;
+int fibonacci(int index)// almost reminds me of an array but not quite
+{
+	if ((index == 1) || (index == 0))
+		return(index);
+
+	else
+		return(fibonacci(index - 1) + fibonacci(index - 2));
+}
+
+int main()
+{
+	int number;
+	int i = 0;
+	cout << "Input the number of terms for Fibonacci Series:";
+	cin >> number;
+	cout << "\nFibonacci Series is as follows\n";
+
+	while (i < number)
+	{
+		cout << " " << fibonacci(i);
+		i++;
+	}
+
+	return 0;
+}
+
