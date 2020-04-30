@@ -1,0 +1,316 @@
+//// tree.cpp : Defines the entry point for the console application.
+////
+//
+#include "stdafx.h"
+//
+//
+#include<stdio.h>
+#include <stdlib.h> 
+//
+//typedef struct node
+//{
+//	struct node*left;
+//	struct node*right;
+//	char data;
+//}node;
+//
+//node* insert(char c[], int n)
+//{
+//	node*tree = NULL;
+//	if (c[n] != '\0')
+//	{
+//		tree = (node*)malloc(sizeof(node));
+//		tree->left = insert(c, 2 * n + 1);
+//		tree->data = c[n];
+//		tree->right = insert(c, 2 * n + 2);
+//	}
+//	return tree;
+//}
+////traverse the tree in inorder
+//void inorder(node*tree)
+//{
+//	if (tree != NULL)
+//	{
+//		inorder(tree->left);
+//		printf("%c\t", tree->data);
+//		inorder(tree->right);
+//	}
+//}
+//
+//void main()
+//{
+//	node*tree = NULL;
+//	char c[] = { 'A','B','C','D','E','F','\0','G','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0' };
+//	tree = insert(c, 0);
+//	inorder(tree);
+//}
+
+/* Binary Tree Traversal - Preorder, Inorder, Postorder */
+#include<iostream>
+using namespace std;
+
+//struct Node {
+//	char data;
+//	struct Node *left;
+//	struct Node *right;
+//};
+//
+////Function to visit nodes in Preorder
+//void Preorder(struct Node *root) {
+//	// base condition for recursion
+//	// if tree/sub-tree is empty, return and exit
+//	if (root == NULL) return;
+//
+//	printf("%c ", root->data); // Print data
+//	Preorder(root->left);     // Visit left subtree
+//	Preorder(root->right);    // Visit right subtree
+//}
+//
+////Function to visit nodes in Inorder
+//void Inorder(Node *root) {
+//	if (root == NULL) return;
+//
+//	Inorder(root->left);       //Visit left subtree
+//	printf("%c ", root->data);  //Print data
+//	Inorder(root->right);      // Visit right subtree
+//}
+//
+////Function to visit nodes in Postorder
+//void Postorder(Node *root) {
+//	if (root == NULL) return;
+//
+//	Postorder(root->left);    // Visit left subtree
+//	Postorder(root->right);   // Visit right subtree
+//	printf("%c ", root->data); // Print data
+//}
+////int height();
+////void LOrder(Node *root)
+////{
+////	//int h = height(root);
+////	int i;
+////	for (i = 1; i <= h; i++)
+////	printf("%c ",root->i); // Print data
+////}
+///* Function to line by line print level order traversal a tree*/
+////void printLevelOrder(struct node* root)
+////{
+////	int h = height(root);
+////	int i;
+////	for (i = 1; i <= h; i++)
+////	{
+////		printGivenLevel(root, i);
+////		printf("\n");
+////	}
+////}
+//
+////void traverse(Node* root)
+////{
+////	
+////
+////	if (root) {
+////		q.push(root);
+////	}
+////	while (!q.empty())
+////	{
+////		const Node * const temp_node = q.front();
+////		q.pop();
+////		cout << temp_node->root<< "\n";
+////
+////		if (temp_node->left) {
+////			q.push(temp_node->left);
+////		}
+////		if (temp_node->right) {
+////			q.push(temp_node->right);
+////		}
+////	}
+////}
+//
+///* Print nodes at a given level */
+////void printGivenLevel(struct node* root, int level)
+////{
+////	if (root == NULL)
+////		return;
+////	if (level == 1)
+////		printf("%d ", root->data);
+////	else if (level > 1)
+////	{
+////		printGivenLevel(root->left, level - 1);
+////		printGivenLevel(root->right, level - 1);
+////	}
+////}
+//// Function to Insert Node in a Binary Search Tree
+//Node* Insert(Node *root, char data) {
+//	if (root == NULL) {
+//		root = new Node();
+//		root->data = data;
+//		root->left = root->right = NULL;
+//	}
+//	else if (data <= root->data)
+//		root->left = Insert(root->left, data);
+//	else
+//		root->right = Insert(root->right, data);
+//	return root;
+//}
+//
+//int main() {
+//	/*Code To Test the logic
+//	Creating an example tree
+//	M
+//	/ \
+//	B   Q
+//	/ \   \
+//	A   C   Z
+//	*/
+//	Node* root = NULL;
+//	root = Insert(root, 'M'); root = Insert(root, 'B');
+//	root = Insert(root, 'Q'); root = Insert(root, 'Z');
+//	root = Insert(root, 'A'); root = Insert(root, 'C');
+//	//Print Nodes in Preorder. 
+//	cout << "Preorder: ";
+//	Preorder(root);
+//	cout << "\n";
+//	//Print Nodes in Inorder
+//	cout << "Inorder: ";
+//	Inorder(root);
+//	cout << "\n";
+//	//Print Nodes in Postorder
+//	cout << "Postorder: ";
+//	Postorder(root);
+//	cout << "\n";
+//}
+int LChild(int nodeInd)//Left Child
+{
+	return nodeInd * 2 + 1;
+}
+
+int RChild(int nodeInd)//Right Child
+{
+	return nodeInd * 2 + 2;
+}
+
+int Parent(int nodeInd)//Parent
+{
+	return (nodeInd - 1) / 2;
+}
+//T_Array = Tree Array, ind = index, s = size, e = element
+void Insert(int T_Array[], int&s, int e)
+{
+	int new_s = s + 1;
+	for (int i = new_s; i > new_s; i--)
+		T_Array[i] = T_Array[i - 1];
+
+	T_Array[s] = e;
+}
+
+void Erase(int T_Array[], int ind, int s)
+{
+	for (int i = ind - 1; i < s; i++)
+		T_Array[i] = T_Array[i + 1];
+}
+
+void In_Order(const int T_Array[], int ind, int end)
+{
+	if (ind <= end)
+	{
+		In_Order(T_Array, LChild(ind), end);
+		cout << T_Array[ind] << ' ';
+		In_Order(T_Array, RChild(ind), end);
+	}
+}
+
+void Pre_Order(const int T_Array[], int ind, int end)
+{
+	if (ind <= end)
+	{
+		cout << T_Array[ind] << ' ';
+		Pre_Order(T_Array, LChild(ind), end);
+		Pre_Order(T_Array, RChild(ind), end);
+	}
+}
+
+void Post_Order(const int T_Array[], int ind, int end)
+{
+	if (ind <= end)
+	{
+		Post_Order(T_Array, LChild(ind), end);
+		Post_Order(T_Array, RChild(ind), end);
+		cout << T_Array[ind] << ' ';
+	}
+}
+
+void LvLOrder(const int T_Array[], int ind, int end)
+{
+	if (ind <= end)
+	{
+		cout << T_Array[ind] << ' ';
+		LvLOrder(T_Array, ind + 1, end);
+	}
+}
+
+void searchParent(const int T_Array[], int ind)
+{
+	int n = ind - 100;
+	if (n == 0)
+		cout << "No parent.. this is the root of the tree " << endl;
+	else
+		cout << T_Array[Parent(n)];
+}
+
+void searchChild(const int T_Array[], int ind)
+{
+	int n = ind - 100;
+	cout << T_Array[LChild(n)] << " and " << T_Array[RChild(n)];
+}
+
+int main()
+{
+	int T_Array[50] = { 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110 };
+	int tree_size = 11;
+
+	cout << "InOrder Traversal is:\t\t ";
+	In_Order(T_Array, 0, tree_size - 1);
+	cout << endl;
+
+	cout << "PreOrder Traversal is:\t\t ";
+	Pre_Order(T_Array, 0, tree_size - 1);
+	cout << endl;
+
+	cout << "PostOrder Traversal is:\t\t ";
+	Post_Order(T_Array, 0, tree_size - 1);
+	cout << endl;
+
+	cout << "The Level Order is:\t\t\t ";
+	LvLOrder(T_Array, 0, tree_size - 1);
+	cout << "\n" << endl;
+
+	int Childsearch;
+	cout << "Type in the child you want to know the children of " << endl;
+	cin >> Childsearch;
+	cout << "The children of " << Childsearch << " are " << endl;
+	searchChild(T_Array, Childsearch);
+	cout << "\n" << endl;
+
+	int parentSearch;
+	cout << "Type in the parent you are looking for " << endl;
+	cin >> parentSearch;
+	cout << " The parent of " << parentSearch << " are " << endl;
+	searchParent(T_Array, parentSearch);
+	cout << "\n" << endl;
+
+	int eraser;
+	cout << "What number do you want to erase from the tree? " << endl;
+	cin >> eraser;
+	cout << "You have erased " << eraser << "from the tree" << endl;
+	Erase(T_Array, eraser, 11);
+	cout << "\n" << endl;
+
+	int inserter;
+	cout << "What number do you want to insert into the tree? " << endl;
+	cin >> inserter;
+	cout << "You have inserted " << inserter << "into the tree" << endl;
+	Insert(T_Array, inserter, 11);
+	cout << "\n" << endl;
+
+
+
+}
