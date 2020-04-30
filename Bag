@@ -1,0 +1,65 @@
+// FILE: bag_test.cpp
+// This is a small demonstration program showing how the bag class is used.
+#include <iostream>    // Provides cout, in and out stream
+#include <cstdlib>     // classes with premade functions so you don't need to write those functions yourself
+#include "bag2.h"      // include the header file so we can implement the classes from there
+//#include "bag2.cpp"    // include the source file
+
+using namespace std;   //provides cin and cout
+
+//method declaration
+//pre condition: method will take in the age from the user
+void get_ages(bag& ages);
+//post condition: user has entered the age as input
+
+//pre condition: method will check to see if the ages are already in the bag, if not the entry is removed
+void check_ages(bag& ages);
+//post condition: ages  has been checked
+
+//pre condition: test program will reference the two main methods created here
+int main( )
+{
+    bag ages;
+
+    get_ages(ages);
+    check_ages(ages);
+    cout << "May your family live long and prosper." << endl;
+    return EXIT_SUCCESS;
+}
+
+//post condition: the test program prints out the ages and references the methods
+
+void get_ages(bag& ages)
+{
+    int user_input;
+
+    cout << "Type the ages in your family." << endl;
+    cout << "Type a negative number when you are done:" << endl;
+    cin >> user_input;
+    while (user_input >= 0)
+    {
+        if (ages.size( ) < ages.CAPACITY)
+            ages.insert(user_input);
+        else
+            cout << "I have run out of room and can’t add that age." << endl;
+        cin >> user_input;
+    }
+}
+
+//pre condition: method will check to see if the ages are already in the bag, if not the entry is removed
+void check_ages(bag& ages)
+{
+    int user_input;
+
+    cout << "Type those ages again. Press return after each age:" << endl;
+    while (ages.size( ) > 0)
+    {
+        cin >> user_input;
+        if (ages.erase_one(user_input))
+            cout << "Yes, I've got that age and will remove it." << endl;
+        else
+            cout << "No, that age does not occur!" << endl;
+    }
+}
+//post condition: ages  has been checked
+
